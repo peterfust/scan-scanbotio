@@ -9,27 +9,26 @@ function onDocumentDetected(result: DocumentDetectionResult) {
 function onDocumentDetectionError(e: Error) {
     console.log(e.name + ': ' + e.message);
   }
+
 function DocumentScannerComponent() {
     
     useEffect(() => {
         const init = async () => {
+            await ScanbotSdkService.instance.initialize();
+            console.log("initialized app -> ScanbotSdkService")
             await ScanbotSdkService.instance.createDocumentScanner(
                 onDocumentDetected,
                 onDocumentDetectionError,
             );
-            await ScanbotSdkService.instance.setLicenseFailureHandler((error: any) => {
-                console.log('Handler.....')
-            });
+            console.log("useEffect -> document scanner")
         }
         init()
             // make sure to catch any error
             .catch(console.error); 
     }, []);
 
-
-
     return (
-      <div style={{ height: "100%" }}> 
+      <div style={{ height: "100%" }}>
         <div
           id={ScanbotSdkService.DOCUMENT_SCANNER_CONTAINER}
           style={{ width: "100%", height: "100%" }}
