@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ScanbotSDK from 'scanbot-web-sdk/webpack'
+import {ScanbotSdkService} from "./services/scanbot-sdk-service";
 
 function App() {
 
@@ -25,11 +26,7 @@ function App() {
             "Y29tCjE2NTUyNTExOTkKODM4ODYwNw" +
             "o4\n";
         const init = async () => {
-            let scanbotSDK = await ScanbotSDK.initialize({
-                licenseKey: LICENSE_KEY,    
-                // optional engine path where ScanbotSDK.Core.js and ScanbotSDK.Asm.wasm are served    
-                engine: "static/js/"
-            });
+            let scanbotSDK = await ScanbotSdkService.instance.initialize();
             setScanbotSDK(scanbotSDK);
         }
         init()
