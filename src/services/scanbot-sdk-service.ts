@@ -1,8 +1,15 @@
 import ScanbotSDK from "scanbot-web-sdk/webpack";
+import {
+    DocumentScannerConfiguration,
+    IDocumentScannerHandle
+  } from "scanbot-web-sdk/@types";
 
 export class ScanbotSdkService {
 
     public static instance = new ScanbotSdkService();
+
+    static DOCUMENT_SCANNER_CONTAINER = "document-scanner-view";
+    documentScanner?: IDocumentScannerHandle;
 
     license = "dni/lQpDfFMEfDd2bLLgnTPOCv71vY" +
         "1KxHqjdfbVToNc7yPEO1iOVZKS6jjn" +
@@ -29,4 +36,54 @@ export class ScanbotSdkService {
         });
         return this.sdk;
     }
+
+    public async createDocumentScanner(detectionCallback: any, errorCallback: (e: Error) => void) {
+        const config: DocumentScannerConfiguration = {
+          onDocumentDetected: detectionCallback,
+          containerId: ScanbotSdkService.DOCUMENT_SCANNER_CONTAINER,
+          text: {
+            hint: {
+              OK: "Capturing your document...",
+              OK_SmallSize: "The document is too small. Try moving closer.",
+              OK_BadAngles:
+                "This is a bad camera angle. Hold the device straight over the document.",
+              OK_BadAspectRatio:
+                "Rotate the device sideways, so that the document fits better into the screen.",
+              OK_OffCenter: "Try holding the device at the center of the document.",
+              Error_NothingDetected:
+                "Please hold the device over a document to start scanning.",
+              Error_Brightness: "It is too dark. Try turning on a light.",
+              Error_Noise: "Please move the document to a clear surface.",
+            },
+          },
+        };
+    
+        if (this.sdk) {
+          try {
+            this.documentScanner = await this.sdk!.createDocumentScanner(config);
+          } catch (e) {
+            errorCallback(e as Error);
+          }
+        }
+    }
+    
+    public disposeDocumentScanner() {
+        this.documentScanner?.dispose();
+    }
+
+    async setLicenseFailureHandler(callback: any) {
+        await this.setLicenceTimeout(callback);
+      }
+    
+      private async setLicenceTimeout(callback: any) {
+        // Scanbot WebSDK does not offer real-time license failure handler. Simply loop to check it manually
+        const info = await this.sdk?.getLicenseInfo();
+        if (info && info.status !== "Trial" && info.status !== "Okay") {
+          callback(info.description);
+        } else {
+          setTimeout(() => {
+            this.setLicenceTimeout(callback);
+          }, 2000);
+        }
+      }
 }
