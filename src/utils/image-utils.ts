@@ -1,4 +1,4 @@
-import ScanbotSDK from "scanbot-web-sdk";
+import ScanbotSDK from "scanbot-web-sdk/webpack";
 
 // @ts-ignore
 import { pdfjs } from "react-pdf";

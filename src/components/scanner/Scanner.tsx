@@ -1,5 +1,5 @@
 import {DocumentDetectionResult} from "scanbot-web-sdk/@types";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import Button from "../button/Button";
 import "./Scanner.css"
 import axios from "axios";
@@ -51,17 +51,19 @@ export const Scanner = () => {
     }
 
     const upload = async () => {
-        const bytes = await ScanbotSdkService.instance.generatePDF(
-            Pages.instance.get()
-        );
+        if (Pages.instance.get().length > 1) {
+            const bytes = await ScanbotSdkService.instance.generatePDF(
+                Pages.instance.get()
+            );
 
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let customerId = params.get('customerId') || '';
-        let consultantId = params.get('consultantId') || '';
+            let search = window.location.search;
+            let params = new URLSearchParams(search);
+            let customerId = params.get('customerId') || '';
+            let consultantId = params.get('consultantId') || '';
 
-        const blob = new Blob([bytes], {type: `application/pdf`});
-        uploadBlob(blob, {processId: 'TEST', fileName: 'test.pdf', customerId, consultantId})
+            const blob = new Blob([bytes], {type: `application/pdf`});
+            uploadBlob(blob, {processId: 'TEST', fileName: 'test.pdf', customerId, consultantId})
+        }
     }
 
     const uploadBlob = (file: Blob, metadata: IMetadata) => {
@@ -77,7 +79,10 @@ export const Scanner = () => {
 
     return (
         <div>
-            <div id="dwtcontrolContainer"></div>
+            <div
+                id={ScanbotSdkService.DOCUMENT_SCANNER_CONTAINER}
+                style={{width: "100%", height: "100%"}}
+            />
             <div className="controlbar">
                 {/* @ts-ignore */}
                 <Button onClick={scanDocument}>Scan your Documents</Button>
