@@ -1,13 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import {ScanbotSdkService} from "./services/scanbot-sdk-service";
-import DocumentScannerComponent from "./components/document-scanner-component"
-
+import {Scanner} from "./components/scanner/Scanner";
+import {BrowserRouter, Route, Routes,} from "react-router-dom";
+import {Layout} from "./pages/Layout";
+import {QrCodeGenerator} from "./components/qrcodegenerator/QrCodeGenerator";
 
 function App() {
 
     return (
-        <DocumentScannerComponent></DocumentScannerComponent>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<Scanner/>}/>
+                    <Route path="qrcode" element={<QrCodeGenerator/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 
 
