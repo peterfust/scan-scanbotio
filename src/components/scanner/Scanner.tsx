@@ -1,5 +1,5 @@
 import {DocumentDetectionResult} from "scanbot-web-sdk/@types";
-import React, {useEffect} from "react";
+import React from "react";
 import Button from "../button/Button";
 import "./Scanner.css"
 import axios from "axios";
@@ -14,18 +14,6 @@ export interface IMetadata {
 }
 
 export const Scanner = () => {
-
-    useEffect(() => {
-
-        const init = async () => {
-            await ScanbotSdkService.instance.initialize();
-
-        }
-        init()
-            // make sure to catch any error
-            .catch(console.error);
-    }, [])
-
 
     const scanDocument = async () => {
         await ScanbotSdkService.instance.createDocumentScanner(
