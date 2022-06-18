@@ -4,7 +4,7 @@ import {QRCode} from "react-qrcode-logo";
 
 export const QrCodeGenerator = () => {
 
-    const [link, setLink] = React.useState<string>('scan-scanbotio.vercel.app?customerId=123&consultantId=345');
+    const [link, setLink] = React.useState<string>('http://scan-scanbotio.vercel.app?customerId=123&consultantId=345');
 
     return(
         <div className="qrcode">
