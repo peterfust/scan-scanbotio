@@ -15,20 +15,21 @@ export class ScanbotSdkService {
     static DOCUMENT_SCANNER_CONTAINER = "document-scanner-view";
     documentScanner?: IDocumentScannerHandle;
 
-    license = "LCjXGh/XOiUyJknl0iQZfNDTunQq0b" +
-        "GaRcUGkjIx3bSclpFMDykgiXzjK3zE" +
-        "334KRoeHjM7YbsNIJLiqJA5pO7UlYL" +
-        "rbZY0jyJ+QeZW019WPouAbbRkUTp/f" +
-        "tTybAHeEdHwG1H4x4kJ+yxlVR0o8KW" +
-        "SRlh0v9MizXSrLPsjCDsFdcJqZWmTh" +
-        "n4iet/9tGs48z/O49AUyrskQUSxRCH" +
-        "B/6gKrN1Z6trP1n96euCvmlfOK4ktb" +
-        "0Q0rWujtI+trkZD2OpJkORmQf/Xz3v" +
-        "098+dZlOw2100M77SUpX+IJbUD+bES" +
-        "FZIoDCJMri2kxMd3CPjmOGWPZvBSZ5" +
-        "XpstNndk+qAw==\nU2NhbmJvdFNESw" +
-        "psb2NhbGhvc3R8bXlhcAoxNjU2MjAx" +
-        "NTk5CjgzODg2MDcKOA==\n";
+    license = "g8q1VWdM1l2PAW9oKbjcYYgxBTy0zq" +
+        "4Je+DnSEamaMEW76Cll4RqdzMxEYF/" +
+        "FZHnhU7t/Zt/vKDCR7U0DSEwOp2K38" +
+        "C1AGBM3HqST/aDohUlBimMLYOqLuYv" +
+        "PgqiyLEdyH90pZrv1HmONekPYo5MAQ" +
+        "SW5oUXU0GEud+7zGCqi4Um9zwgOkjS" +
+        "5KETmRhhn+hmpg9CRNA4zK24ukorTN" +
+        "FxxFhe0YHeXwkMgOwzD00jfVpxbq1l" +
+        "i8Ce0nmPfg9Ilo1+O0Xdydu332Usmp" +
+        "BE1DO256tauqDwBddBbtLowsfNaPQV" +
+        "DKQrKnAwcD/H/FYKVLggMCORk47e0z" +
+        "9KuK5be1/nIw==\nU2NhbmJvdFNESw" +
+        "psb2NhbGhvc3R8c2Nhbi1zY2FuYm90" +
+        "aW8udmVyY2VsLmFwcAoxNjU2MjAxNT" +
+        "k5CjgzODg2MDcKOA==\n";
 
     sdk?: ScanbotSDK;
 
